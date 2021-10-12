@@ -1,0 +1,15 @@
+# ALL_CATEGORIES = 'All Categories'
+LIFESTYLE = 'LifeStyle'
+FOOD = 'Food'
+HEALTHY = 'Healthy'
+SPORTS = 'Sports'
+ENTERTAINER = 'Entertainer'
+
+CATEGORIES = (
+    # (ALL_CATEGORIES, ALL_CATEGORIES),
+    (LIFESTYLE, LIFESTYLE),
+    (FOOD, FOOD),
+    (HEALTHY, HEALTHY),
+    (SPORTS, SPORTS),
+    (ENTERTAINER, ENTERTAINER)
+)

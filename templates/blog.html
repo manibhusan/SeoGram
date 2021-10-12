@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <header>
+        <div class="container">
+            <div class="page-banner">
+                <div class="row justify-content-center align-items-center h-100">
+                    <div class="col-md-6">
+                        <nav aria-label="Breadcrumb">
+                            <ul class="breadcrumb justify-content-center py-0 bg-transparent">
+                                <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+                                <li class="breadcrumb-item active">Blog</li>
+                            </ul>
+                        </nav>
+                        <h1 class="text-center">Blog</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="page-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10">
+                    <form action="/search" method="GET" class="form-search-blog">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <select id="categories" onChange="handleChange()" class="custom-select bg-light">
+
+                                    <option>All Categories</option>
+                                    {% for cat in category %}
+                                        {console.log(cat, "item")}
+                                        <option value="{{ cat.id }}">{{ cat.name }}</option>
+                                        {{ cat.name }}
+                                    {% endfor %}
+
+                                </select>
+                            </div>
+                            <input type="text" id="inputValue" class="form-control" placeholder="Enter keyword..">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-2 text-sm-right">
+                    <button class="btn btn-secondary">Filter <span class="mai-filter"></span></button>
+                </div>
+            </div>
+            <div class="row my-5">
+                {% for i in blog %}
+                    <a href="{% url 'detail' i.id %}">
+                        <div class="col-lg-4 py-3 wow fadeInUp">
+                            <div class="card-blog">
+                                <div class="header">
+                                    <div class="post-thumb">
+                                        {#<img src="{% static '/assets/img/blog/blog-1.jpg' %}" alt="">#}
+                                        <img src="{{ i.image.url }}" alt="">
+                                    </div>
+                                </div>
+                                <div class="body">
+                                    <h5 class="post-title">{{ i.title }}</h5>
+                                    <div class="post-date">Posted on <a href="#">{{ i.date }}</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                                {% endfor %}
+
+            </div>
+                        {% if is_paginated %}
+                            <nav aria-label="Page Navigation">
+                                <ul class="pagination justify-content-center">
+                                    {% if page_obj.has_previous %}
+                                        <li class="page-item">
+                                            <a class="page-link" tabindex="-1" aria-disabled="true"
+                                               href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                                        </li>
+                                    {% endif %}
+                                    {% for i in blog.paginator.page_range %}
+                                        {% if i == page_obj.number %}
+                                            <li class="page-item active" aria-current="page">
+                                                <a class="page-link" href="?page={{ i }}" span
+                                                   class="visually-hidden">{{ i }} </span> </a>
+
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if blog.page_obj.has_next %}
+
+                                        <li class="page-item">
+                                            <a class="page-link" tabindex="-1" href="?page={{ page_obj.next_page_number }}">Next</a>
+                                        </li>
+
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% load static %}
+<!--footer-section-->
+<footer class="page-footer bg-image" style="background-image: url({% static '/assets/img/world_pattern.svg' %});">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-3 py-3">
+                <h3>SEOGram</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero amet, repellendus eius blanditiis in
+                    iusto eligendi iure.</p>
+
+                <div class="social-media-button">
+                    {% if config.FACEBOOK %}
+                    <a href="{{ config.FACEBOOK }}" target="_blank"><span class="mai-logo-facebook-f"></span></a>
+                    {% else %}
+                    <a href="#"><span class="mai-logo-facebook-f"></span></a>
+                    {% endif %}
+                    {% if config.TWITTER %}
+                    <a href="{{ config.TWITTER }}" target="_blank"><span class="mai-logo-twitter"></span></a>
+                    {% else %}
+                    <a href="#"><span class="mai-logo-twitter"></span></a>
+                    {% endif %}
+                    {% if config.GOOGLE %}
+                    <a href="{{ config.GOOGLE }}" target="_blank"><span class="mai-logo-google-plus-g"></span></a>
+                    {% else %}
+                    <a href="#"><span class="mai-logo-google-plus-g"></span></a>
+                    {% endif %}
+                    {% if config.INSTAGRAM %}
+                    <a href="{{ config.INSTAGRAM }}" target="_blank"><span class="mai-logo-instagram"></span></a>
+                    {% else %}
+                    <a href="#"><span class="mai-logo-instagram"></span></a>
+                    {% endif %}
+                     {% if config.INSTAGRAM %}
+                    <a href="{{ config.YOUTUBE }}" target="_blank"><span class="mai-logo-youtube"></span></a>
+                     {% else %}
+                    <a href="#"><span class="mai-logo-youtube"></span></a>
+                     {% endif %}
+
+                </div>
+            </div>
+            <div class="col-lg-3 py-3">
+                <h5>Company</h5>
+                <ul class="footer-menu">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Career</a></li>
+                    <li><a href="#">Advertise</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Help & Support</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 py-3">
+                <h5>Contact Us</h5>
+
+{#                <p>203 Fake St. Mountain View, San Francisco, California, USA</p>#}
+                <p>{{ config.ADDRESS }}</p>
+                <a href="#" class="footer-link"><p>{{ config.PHONE }}</p></a>
+                <a href="#" class="footer-link"><p>{{ config.EMAIL }}</p></a>
+            </div>
+            <div class="col-lg-3 py-3">
+                <h5>Newsletter</h5>
+                <p>Get updates, news or events on your mail.</p>
+{#                <form action="#">#}
+                <form method="POST" action="{% url 'news_letter'%}">
+                {%csrf_token%}
+                    <input type="text"  name='email' class="form-control" placeholder="Enter your email..">
+                    <button type="submit" class="btn btn-success btn-block mt-2">Subscribe</button>
+                </form>
+            </div>
+        </div>
+
+        <p class="text-center" id="copyright">Copyright &copy; 2020. This template design and develop by <a
+                href="https://macodeid.com/" target="_blank">MACode ID</a></p>
+    </div>
+</footer>
