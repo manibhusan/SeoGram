@@ -6,6 +6,22 @@ from .enums import CATEGORIES
 
 # Create your models here.
 
+class HomeSection(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    video_link = models.URLField(max_length=200, blank=True, null=True)
+    image = models.ImageField(upload_to='uploads/')
+
+    class Meta:
+        verbose_name = 'HomeSection'
+        verbose_name_plural = 'HomeSections'
+
+    def __str__(self):
+        return self.title
+
+
+
+
 
 class Seo(models.Model):
     image = models.ImageField(upload_to='uploads/')
@@ -69,6 +85,7 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
+        ordering = ['id']
 
     def __str__(self):
         return self.name
@@ -85,6 +102,7 @@ class Blog(models.Model):
     class Meta:
         verbose_name = 'Blog'
         verbose_name_plural = 'Blogs'
+        ordering = ['id']
 
     def __str__(self):
         return self.title
@@ -128,3 +146,34 @@ class Newsletter(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class BannerSection(models.Model):
+    image = models.ImageField(upload_to='uploads/')
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+
+    class Meta:
+        verbose_name = 'Banner Section'
+        verbose_name_plural = 'Banner Sections'
+
+    def __str__(self):
+        return self.title
+
+
+class SubBanner(models.Model):
+    banner_section = models.ForeignKey(BannerSection, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+
+    class Meta:
+        verbose_name = 'Sub Banner'
+        verbose_name_plural = 'Sub Banners'
+
+    def __str__(self):
+        return self.title
+
+
+
+
+

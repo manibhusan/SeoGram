@@ -98,8 +98,9 @@
           <div class="widget">
             <!-- Widget search -->
             <div class="widget-box">
-              <form action="#" class="search-widget">
-                <input type="text" class="form-control" placeholder="Enter keyword..">
+{#              <form action="#" class="search-widget">#}
+                  <form method="GET" action="{% url 'search' %}" class="search-widget" >
+                <input type="search"  name='search' class="form-control" placeholder="Search title">
                 <button type="submit" class="btn btn-primary btn-block">Search</button>
               </form>
             </div>

@@ -17,6 +17,7 @@ urlpatterns = [
     re_path('detail/(?P<pk>\d+)/', views.Detail.as_view(), name='detail'),
     re_path('category/(?P<pk>\d+)/', views.CategoryView.as_view(), name='catogory'),
     path('blog-list/', views.BlogListView.as_view(), name='blog'),
+    path('results/', views.SearchView.as_view(), name='search'),
 
 
     # url(r'^blog-detail/', Detail.as_view()),

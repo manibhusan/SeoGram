@@ -17,6 +17,9 @@ class IndexView(TemplateView):
         context['seo_team'] = SeoTeam.objects.all()
         context['plan'] = Plan.objects.all()
         context['blog'] = Blog.objects.all().order_by("-pk")[:3]
+        context['section'] = HomeSection.objects.all()
+        context['banner_section'] = BannerSection.objects.all()
+        context['sub_banner'] = SubBanner.objects.all()
         return context
 
 
@@ -143,3 +146,19 @@ class CategoryView(generic.ListView):
         context['blog'] = p.page(context['page_obj'].number)
 
         return context
+
+class SearchView(ListView):
+    model = Blog
+    template_name = 'blog.html'
+    context_object_name = 'blog'
+
+    def get_queryset(self):
+        result = super(SearchView, self).get_queryset()
+        query = self.request.GET.get('search')
+        if query:
+            # postresult = Doctors.objects.filter(department__contains=query)
+            doctor = [item for item in Blog.objects.all() if query in item.description or query in item.title]
+            result = doctor
+        else:
+            result = None
+        return result
